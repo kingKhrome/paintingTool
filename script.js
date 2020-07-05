@@ -6,8 +6,10 @@
           keyCode, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize */
 
 let backgroundColor;
-let circle = {
-  
+const circle = {
+  x: 10,
+  y: 10,
+  d: 10,
 };
 
 function setup() {
@@ -20,5 +22,5 @@ function setup() {
 function draw() {
   background(75, 100, 100);
   fill(0);
-  ellipse(100, 100, 100);
+  ellipse(circle.x, circle.y, circle.d);
 }
