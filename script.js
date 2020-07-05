@@ -14,7 +14,8 @@ const circle = {
 
 function setup() {
   // Canvas & color settings
-  const canvas = createCanvas(windowWidth, 400);
+  const canvasDiv = document.getElementById('canvas');
+  const canvas = createCanvas(canvasDiv.offsetWidth, 400);
   canvas.parent('canvas');
   colorMode(HSB, 360, 100, 100);
   backgroundColor = 100;
