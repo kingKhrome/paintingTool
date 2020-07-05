@@ -9,12 +9,13 @@ let backgroundColor;
 const circle = {
   x: 10,
   y: 10,
-  d: 10,
+  d: 10
 };
 
 function setup() {
   // Canvas & color settings
-  createCanvas(400, 400);
+  const canvas = createCanvas(windowWidth, 400);
+  canvas.parent('canvas');
   colorMode(HSB, 360, 100, 100);
   backgroundColor = 100;
 }
@@ -23,4 +24,7 @@ function draw() {
   background(75, 100, 100);
   fill(0);
   ellipse(circle.x, circle.y, circle.d);
+  if (!mouseIsPressed) {
+    circle.x = (circle.x + 1) % width;
+  }
 }
