@@ -18,7 +18,7 @@ function setup() {
   createCanvas(300, 300);
   // Load the image once.
   dvdImage = loadImage(
-    "https://cdn.glitch.com/eaea72a4-ac6d-4777-b76e-f37d75959aa5%2Fdvd.jpeg?1515761833387"
+    'https://cdn.glitch.com/eaea72a4-ac6d-4777-b76e-f37d75959aa5%2Fdvd.jpeg?1515761833387'
   );
 
   // Set up Controller Variables
@@ -68,8 +68,8 @@ function draw() {
   image(dvdImage, x, y, logoWidth, logoHeight);
 
   // Debugging
-  text("x: " + x, 0, height - 10);
-  text("y: " + y, 50, height - 10);
-  text("xVelocity: " + xVelocity, 100, height - 10);
-  text("yVelocity: " + yVelocity, 200, height - 10);
+  text('x: ' + x, 0, height - 10);
+  text('y: ' + y, 50, height - 10);
+  text('xVelocity: ' + xVelocity, 100, height - 10);
+  text('yVelocity: ' + yVelocity, 200, height - 10);
 }
