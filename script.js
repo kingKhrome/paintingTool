@@ -33,8 +33,6 @@ function setup() {
 
   // Set up Controller Variables
 
-  // Adjust to change speed
-  masterVelocity = 1;
   // Adjust the width of the logo
   dvdWidth = 200;
   // Adjust the height of the logo
@@ -43,8 +41,8 @@ function setup() {
   // Set up starting values.
   dvdX = 50;
   dvdY = 50;
-  dvdXVelocity = masterVelocity;
-  dvdYVelocity = masterVelocity;
+  dvdXVelocity = 1;
+  dvdYVelocity = 1;
 }
 
 function draw() {
@@ -54,17 +52,17 @@ function draw() {
   // horizontal movement.
   if (dvdX > width - dvdWidth) {
     // If it's too far right, make velocity negative
-    dvdXVelocity = -1 * masterVelocity;
+    dvdXVelocity = -dvdXVelocity;
   } else if (dvdX < 0) {
     // if it's too far left, make the velocity positive
-    dvdXVelocity = masterVelocity;
+    dvdXVelocity = -dvdXVelocity;
   }
 
   // Same check, but for vertical movement. Reverse it in either case.
   if (dvdY > height - dvdHeight) {
-    dvdYVelocity = -masterVelocity;
+    dvdYVelocity = -dvdYVelocity;
   } else if (dvdY < 0) {
-    dvdYVelocity = masterVelocity;
+    dvdYVelocity = -dvdYVelocity;
   }
 
   // Move the shape by changing the values of dvdX and dvdY,
@@ -80,7 +78,7 @@ function draw() {
 
   // Debugging
   text("dvdX: " + dvdX, 0, height - 10);
-  text("dvdY: " + dvdY, 50, height - 10);
-  text("dvdXVelocity: " + dvdXVelocity, 100, height - 10);
+  text("dvdY: " + dvdY, 55, height - 10);
+  text("dvdXVelocity: " + dvdXVelocity, 110, height - 10);
   text("dvdYVelocity: " + dvdYVelocity, 200, height - 10);
 }
