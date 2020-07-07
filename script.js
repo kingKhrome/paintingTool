@@ -31,18 +31,20 @@ function setup() {
     "https://cdn.glitch.com/9ca9771e-2b27-465a-87d8-e4ac73d86a07%2FtennisBall.png?v=1594161137161"
   );
 
-  // Set up Controller Variables
-
-  // Adjust the width of the logo
-  dvdWidth = 200;
-  // Adjust the height of the logo
-  dvdHeight = 150;
-
   // Set up starting values.
   dvdX = 50;
   dvdY = 50;
   dvdXVelocity = 1;
   dvdYVelocity = 1;
+  dvdWidth = 200;
+  dvdHeight = 150;
+  
+  tennisX = 50;
+  tennisY = 50;
+  tennisXVelocity = 1;
+  tennisYVelocity = 2;
+  tennisWidth = 50;
+  tennisHeight = 50;
 }
 
 function draw() {
@@ -64,12 +66,31 @@ function draw() {
   } else if (dvdY < 0) {
     dvdYVelocity = -dvdYVelocity;
   }
+  
+  // Check to make sure the image isn't at or over the edge of the screen for
+  // horizontal movement.
+  if (tennisX > width - tennisWidth) {
+    // If it's too far right, make velocity negative
+    tennisXVelocity = -tennisXVelocity;
+  } else if (tennisX < 0) {
+    // if it's too far left, make the velocity positive
+    tennisXVelocity = -tennisXVelocity;
+  }
 
-  // Move the shape by changing the values of dvdX and dvdY,
+  // Same check, but for vertical movement. Reverse it in either case.
+  if (tennisY > height - tennisHeight) {
+    tennisYVelocity = -tennisYVelocity;
+  } else if (tennisY < 0) {
+    tennisYVelocity = -tennisYVelocity;
+  }
+
+  // Move the shape by changing the values of x and y,
   // unless the mouse is being pressed.
   if (!mouseIsPressed) {
     dvdX += dvdXVelocity;
     dvdY += dvdYVelocity;
+    tennisX += tennisXVelocity;
+    tennisY += tennisYVelocity;
   }
 
   // Draw the logo at the new position.
