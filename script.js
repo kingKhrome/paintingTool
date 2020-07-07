@@ -6,19 +6,29 @@
           keyCode, PI, HALF_PI, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize */
 
 let dvdImage;
+let tennisImage;
 let masterVelocity;
-let logoWidth;
-let logoHeight;
-let x;
-let y;
-let xVelocity;
-let yVelocity;
+let dvdWidth;
+let dvdHeight;
+let dvdX;
+let dvdY;
+let dvdXVelocity;
+let dvdYVelocity;
+let tennisX;
+let tennisY;
+let tennisWidth;
+let tennisHeight;
+let tennisXVelocity;
+let tennisYVelocity;
 
 function setup() {
   createCanvas(300, 300);
   // Load the image once.
   dvdImage = loadImage(
-    'https://cdn.glitch.com/9ca9771e-2b27-465a-87d8-e4ac73d86a07%2FdvdLogo.jpeg?v=1594154686865'
+    "https://cdn.glitch.com/9ca9771e-2b27-465a-87d8-e4ac73d86a07%2FdvdLogo.jpeg?v=1594154686865"
+  );
+  tennisImage = loadImage(
+    "https://cdn.glitch.com/9ca9771e-2b27-465a-87d8-e4ac73d86a07%2FtennisBall.png?v=1594161137161"
   );
 
   // Set up Controller Variables
@@ -26,15 +36,15 @@ function setup() {
   // Adjust to change speed
   masterVelocity = 1;
   // Adjust the width of the logo
-  logoWidth = 200;
+  dvdWidth = 200;
   // Adjust the height of the logo
-  logoHeight = 150;
+  dvdHeight = 150;
 
   // Set up starting values.
-  x = 50;
-  y = 50;
-  xVelocity = masterVelocity;
-  yVelocity = masterVelocity;
+  dvdX = 50;
+  dvdY = 50;
+  dvdXVelocity = masterVelocity;
+  dvdYVelocity = masterVelocity;
 }
 
 function draw() {
@@ -42,34 +52,35 @@ function draw() {
 
   // Check to make sure the image isn't at or over the edge of the screen for
   // horizontal movement.
-  if (x > width - logoWidth) {
+  if (dvdX > width - dvdWidth) {
     // If it's too far right, make velocity negative
-    xVelocity = -1 * masterVelocity;
-  } else if (x < 0) {
+    dvdXVelocity = -1 * masterVelocity;
+  } else if (dvdX < 0) {
     // if it's too far left, make the velocity positive
-    xVelocity = masterVelocity;
+    dvdXVelocity = masterVelocity;
   }
 
   // Same check, but for vertical movement. Reverse it in either case.
-  if (y > height - logoHeight) {
-    yVelocity = -masterVelocity;
-  } else if (y < 0) {
-    yVelocity = masterVelocity;
+  if (dvdY > height - dvdHeight) {
+    dvdYVelocity = -masterVelocity;
+  } else if (dvdY < 0) {
+    dvdYVelocity = masterVelocity;
   }
 
-  // Move the shape by changing the values of x and y,
+  // Move the shape by changing the values of dvdX and dvdY,
   // unless the mouse is being pressed.
   if (!mouseIsPressed) {
-    x += xVelocity;
-    y += yVelocity;
+    dvdX += dvdXVelocity;
+    dvdY += dvdYVelocity;
   }
 
   // Draw the logo at the new position.
-  image(dvdImage, x, y, logoWidth, logoHeight);
+  image(dvdImage, dvdX, dvdY, dvdWidth, dvdHeight);
+  image(tennisImage, tennisX, tennisY, tennisWidth, tennisHeight);
 
   // Debugging
-  text('x: ' + x, 0, height - 10);
-  text('y: ' + y, 50, height - 10);
-  text('xVelocity: ' + xVelocity, 100, height - 10);
-  text('yVelocity: ' + yVelocity, 200, height - 10);
+  text("dvdX: " + dvdX, 0, height - 10);
+  text("dvdY: " + dvdY, 50, height - 10);
+  text("dvdXVelocity: " + dvdXVelocity, 100, height - 10);
+  text("dvdYVelocity: " + dvdYVelocity, 200, height - 10);
 }
