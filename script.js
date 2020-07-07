@@ -18,7 +18,7 @@ function setup() {
   createCanvas(300, 300);
   // Load the image once.
   dvdImage = loadImage(
-    'https://cdn.glitch.com/eaea72a4-ac6d-4777-b76e-f37d75959aa5%2Fdvd.jpeg?1515761833387'
+    'https://cdn.glitch.com/9ca9771e-2b27-465a-87d8-e4ac73d86a07%2FdvdLogo.jpeg?v=1594154686865'
   );
 
   // Set up Controller Variables
