@@ -1,4 +1,4 @@
-let backgroundColor
+let backgroundColor = 0
 let width = 500
 let height = 500
 function setup() {
@@ -13,13 +13,32 @@ let paintBox_Y = height/25
 let color = 1
 
 
+function setColor() {
+  if (mouseIsPressed) {
+    return (get(mouseX,mouseY))
+  }
+}
+function makePaints() {
+  for(let i=0; i<paintBox_X.length-1; i++){ 
+    fill(color*i*35,100,95)
+    rect( paintBox_X[i] ,0 ,paintBox_X[i+1] ,paintBox_Y)
+    fill(color*i*17,50,90)
+    rect( paintBox_X[i] ,paintBox_Y ,paintBox_X[i+1] ,paintBox_Y)
+  }  
+}
+
+function draw() {
+  if (mouseISPressed) {
+    
+  }
+}
 
 function draw() {
   background(backgroundColor);
-  for(let i=0; i<paintBox_X.length-1; i++){ 
-    fill(color*i*35,100,100)
-    rect( paintBox_X[i] ,paintBox_Y ,paintBox_X[i+1] ,paintBox_Y) }
-  console.log('hello')
+  makePaints()
+  fill(setColor())
+  
+  
   }
              
   
