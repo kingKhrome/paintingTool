@@ -50,7 +50,7 @@ function draw() {
 function drawCenterLine() {
   // This function will turn stroke on, draw the line, and then turn stroke
   // back off.
-  // Remember a line segment in p5.js has four arguments: x1, y1, x2, y2
+  // A line segment in p5.js has four arguments: x1, y1, x2, y2
   stroke(textColor);
   line(200, 0, 200, 400);
   noStroke();
