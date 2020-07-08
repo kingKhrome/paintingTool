@@ -5,7 +5,6 @@ function setup() {
   // Canvas & color settings
   createCanvas(width, height);
   background(backgroundColor);
-  colorMode(HSB,360,100,100)
   noStroke()
 
 }
@@ -16,13 +15,16 @@ let color = 1
 
 
 function setColor() {
-  if (mouseIsPressed && mouseY<paintBox_Y) {
+  if (mouseIsPressed && mouseY<2*paintBox_Y) {
     colorMode(RGB)
-    fill(get(mouseX,mouseY))
-    colorMode(HSB)
+    let col = get(mouseX,mouseY)
+    fill(col[0],col[1],col[2])
+    scribble()
+    rect(200,200,250,250)
   }
 }
 function makePaints() {
+  colorMode(HSB,360,100,100)
   for(let i=0; i<paintBox_X.length-1; i++){ 
     fill(color*i*35,100,95)
     rect( paintBox_X[i] ,0 ,paintBox_X[i+1] ,paintBox_Y)
@@ -32,7 +34,7 @@ function makePaints() {
 }
 
 function scribble() {
-  if (mouseISPressed) {
+  if (mouseIsPressed) {
     circle(mouseX,mouseY,5)
   }
 }
@@ -40,8 +42,7 @@ function scribble() {
 
 function draw() {
   makePaints()
-  console.log(setColor())
-  fill(setColor())
+  setColor()
   scribble()
   
   
