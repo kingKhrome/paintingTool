@@ -9,12 +9,18 @@ function setup() {
   frameRate(1000)
 
 }
+function wait(s) {
+  let time = Date.now();
+  let t = null;
+  while (t - time < s) {
+    t = Date.now(); }
+}
 
 let paintBox_X = [0,1*width/10,2*width/10,3*width/10,4*width/10,5*width/10,6*width/10,7*width/10,8*width/10,9*width/10,width]
 let paintBox_Y = height/25
 let color1 = 1
 let color2 = 255
-let brushSize =5
+let brushSize =10
 
 function setColor() {
   if (mouseIsPressed && mouseY<2*paintBox_Y) {
@@ -53,7 +59,7 @@ function scribble() {
 
 function changeSize(){
   fill('white')
-  rect(0,height-height/10 -5,width/10.5,height/20)
+  rect(0,445,width/10.5,25)
   fill(0)
   textStyle(BOLD)
   text('Bigger',3,height-height/13)
@@ -64,7 +70,16 @@ function changeSize(){
   textStyle(BOLD)
   text('Smaller',2,433)
   
-  if ()
+  if (mouseIsPressed && dist(mouseX,mouseY,24,425) < 20){
+    if (brushSize > 1) brushSize-=1;
+    wait(100)
+    console.log('yea')
+  }
+  if (mouseIsPressed && dist(mouseX,mouseY,24,455) < 20){
+    if (brushSize > 1) brushSize-=1;
+    wait(100)
+    console.log('yea')
+  }
   
 }
 
