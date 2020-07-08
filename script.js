@@ -5,106 +5,53 @@
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, noFill, windowWidth, windowHeight, noStroke, 
           keyCode, PI, HALF_PI, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize */
 
-let dvdImage;
-let tennisImage;
-let masterVelocity;
-let dvdWidth;
-let dvdHeight;
-let dvdX;
-let dvdY;
-let dvdXVelocity;
-let dvdYVelocity;
-let tennisX;
-let tennisY;
-let tennisWidth;
-let tennisHeight;
-let tennisXVelocity;
-let tennisYVelocity;
-let tintColor = 0;
+// We'll use variables for most of our colors in this code-along.
+let backgroundColor;
+let color1;
+let color2;
+let textColor;
 
 function setup() {
+  // Canvas & color settings
   createCanvas(300, 300);
-  
-  // Makes it easier to pick a random fully-saturated color.
-  colorMode(HSB);
-  
-  // Load the image once.
-  dvdImage = loadImage(
-    "https://cdn.glitch.com/9ca9771e-2b27-465a-87d8-e4ac73d86a07%2FdvdLogo.jpeg?v=1594154686865"
-  );
-  tennisImage = loadImage(
-    "https://cdn.glitch.com/9ca9771e-2b27-465a-87d8-e4ac73d86a07%2FtennisBall.png?v=1594161137161"
-  );
+  colorMode(HSB, 360, 100, 100);
+  noStroke();
 
-  // Set up starting values.
-  dvdX = 50;
-  dvdY = 50;
-  dvdXVelocity = 1;
-  dvdYVelocity = 1;
-  dvdWidth = 200;
-  dvdHeight = 150;
-  
-  tennisX = 50;
-  tennisY = 50;
-  tennisXVelocity = 1;
-  tennisYVelocity = 2;
-  tennisWidth = 50;
-  tennisHeight = 50;
+  // When used with only one argument, the color mode is greyscale.
+  // 0 is black and 100 is white.
+  backgroundColor = color(95);
+  textColor = color(20);
+  // When used with three arguments, the function takes, in this order:
+  // HUE - 0 to 360 degrees on a color wheel - 0 is red, 120 is green and 240
+  //       is blue.
+  // SATURATION - 0 is no color (greyscale), and 100 is as bold as possible.
+  // BRIGHTNESS - 0 is no light (black), and 100 is as bright as possible.
+  color1 = color(0, 80, 80);
+  color2 = color(200, 80, 80);
 }
 
 function draw() {
-  background(220);
+  background(backgroundColor);
+  // Call the drawCenterLine function here to run the three lines of code
+  // contained in that function.
 
-  // Check to make sure the image isn't at or over the edge of the screen for
-  // horizontal movement.
-  if (dvdX > width - dvdWidth || dvdX < 0) {
-    dvdXVelocity = -dvdXVelocity;
-    tintColor = random(255);
-  }
+  // The red and blue circles:
+  fill(color1);
+  ellipse(100, 200, 50);
+  fill(color2);
+  ellipse(300, 200, 50);
 
-  // Same check, but for vertical movement. Reverse it in either case.
-  if (dvdY > height - dvdHeight || dvdY < 0) {
-    dvdYVelocity = -dvdYVelocity;
-    tintColor = random(255);
-  }
-  
-  // Check to make sure the image isn't at or over the edge of the screen for
-  // horizontal movement.
-  if (tennisX > width - tennisWidth || tennisX < 0) {
-    // If it's too far right, make velocity negative
-    tennisXVelocity = -tennisXVelocity;
-  }
+  // The grey circle and the text:
+  fill(textColor);
+  ellipse(50, 50, 50);
+  text("Flip the switch", 20, 20);
+}
 
-  // Same check, but for vertical movement. Reverse it in either case.
-  if (tennisY > height - tennisHeight || tennisY < 0) {
-    tennisYVelocity = -tennisYVelocity;
-  }
-
-  // Move the shape by changing the values of x and y,
-  // unless the mouse is being pressed.
-  if (!mouseIsPressed) {
-    dvdX += dvdXVelocity;
-    dvdY += dvdYVelocity;
-    tennisX += tennisXVelocity;
-    tennisY += tennisYVelocity;
-  }
-
-  // Draw the logo at the new position with the current tint color.
-  tint(tintColor, 255, 255);
-  image(dvdImage, dvdX, dvdY, dvdWidth, dvdHeight);
-  noTint();
-  
-  image(tennisImage, tennisX, tennisY, tennisWidth, tennisHeight);
-
-  // Debugging
-  
-  text("dvdX: " + dvdX, 0, height - 10);
-  text("dvdY: " + dvdY, 55, height - 10);
-  text("dvdXVelocity: " + dvdXVelocity, 110, height - 10);
-  text("dvdYVelocity: " + dvdYVelocity, 200, height - 10);
-
-  text("tX: " + tennisX, 0, height - 20);
-  text("tY: " + tennisY, 55, height - 20);
-  text("tXVelocity: " + tennisXVelocity, 110, height - 20);
-  text("tYVelocity: " + tennisYVelocity, 200, height - 20);
+function drawCenterLine() {
+  // This function will turn stroke on, draw the line, and then turn stroke
+  // back off.
+  // Remember a line segment in p5.js has four arguments: x1, y1, x2, y2
+  stroke(textColor);
+  line(200, 0, 200, 400);
+  noStroke();
 }
