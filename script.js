@@ -13,7 +13,7 @@ let textColor;
 
 function setup() {
   // Canvas & color settings
-  createCanvas(300, 300);
+  createCanvas(400, 400);
   colorMode(HSB, 360, 100, 100);
   noStroke();
 
