@@ -14,6 +14,7 @@ let paintBox_X = [0,1*width/10,2*width/10,3*width/10,4*width/10,5*width/10,6*wid
 let paintBox_Y = height/25
 let color1 = 1
 let color2 = 255
+let brushSize =5
 
 function setColor() {
   if (mouseIsPressed && mouseY<2*paintBox_Y) {
@@ -34,11 +35,11 @@ function makePaints() {
 
 function earse() {
   fill('white')
-  rect(0,height-height/20,width/9,height-height/20)
+  rect(0,height-height/20,width/10.5,height-height/20)
   fill(0)
   textStyle(BOLD)
   text('Reset',5,height-height/55)
-  if(mouseIsPressed && dist(mouseX,mouseY,width/18,height-height/40) < 20 ) {
+  if(mouseIsPressed && dist(mouseX,mouseY,width/20,height-height/40) < 20 ) {
     console.log('hi')
     background(backgroundColor);
   }
@@ -46,8 +47,25 @@ function earse() {
 function scribble() {
   if (mouseIsPressed) {
     fill(color2)
-    circle(mouseX,mouseY,5)
+    circle(mouseX,mouseY,brushSize)
   }
+}
+
+function changeSize(){
+  fill('white')
+  rect(0,height-height/10 -5,width/10.5,height/20)
+  fill(0)
+  textStyle(BOLD)
+  text('Bigger',3,height-height/13)
+  
+  fill('white')
+  rect(0,415,47.6,25)
+  fill(0)
+  textStyle(BOLD)
+  text('Smaller',2,433)
+  
+  if ()
+  
 }
 
 
@@ -56,6 +74,7 @@ function draw() {
   setColor()
   scribble()
   earse()
+  changeSize()
   
   
   }
