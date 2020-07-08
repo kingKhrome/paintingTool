@@ -1,7 +1,7 @@
 // Be sure to name any p5.js functions we use in the global so Glitch can recognize them.
 // Add to this list as you consult the p5.js documentation for other functions.
 /* global angleMode, DEGREES, arc, clear, createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
-          rect, ellipse, stroke, image, loadImage, collideCircleCircle, collideRectCircle, text, 
+          rect, ellipse, stroke, image, loadImage, collideCircleCircle, collideRectCircle, text, tint, noTint
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, noFill, windowWidth, windowHeight, noStroke, 
           keyCode, PI, HALF_PI, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize */
 
@@ -20,9 +20,14 @@ let tennisWidth;
 let tennisHeight;
 let tennisXVelocity;
 let tennisYVelocity;
+let tintColor = 0;
 
 function setup() {
   createCanvas(300, 300);
+  
+  // Makes it easier to pick a random fully-saturated color.
+  colorMode(HSB);
+  
   // Load the image once.
   dvdImage = loadImage(
     "https://cdn.glitch.com/9ca9771e-2b27-465a-87d8-e4ac73d86a07%2FdvdLogo.jpeg?v=1594154686865"
@@ -52,35 +57,26 @@ function draw() {
 
   // Check to make sure the image isn't at or over the edge of the screen for
   // horizontal movement.
-  if (dvdX > width - dvdWidth) {
-    // If it's too far right, make velocity negative
+  if (dvdX > width - dvdWidth || dvdX < 0) {
     dvdXVelocity = -dvdXVelocity;
-  } else if (dvdX < 0) {
-    // if it's too far left, make the velocity positive
-    dvdXVelocity = -dvdXVelocity;
+    tintColor = random(255);
   }
 
   // Same check, but for vertical movement. Reverse it in either case.
-  if (dvdY > height - dvdHeight) {
+  if (dvdY > height - dvdHeight || dvdY < 0) {
     dvdYVelocity = -dvdYVelocity;
-  } else if (dvdY < 0) {
-    dvdYVelocity = -dvdYVelocity;
+    tintColor = random(255);
   }
   
   // Check to make sure the image isn't at or over the edge of the screen for
   // horizontal movement.
-  if (tennisX > width - tennisWidth) {
+  if (tennisX > width - tennisWidth || tennisX < 0) {
     // If it's too far right, make velocity negative
-    tennisXVelocity = -tennisXVelocity;
-  } else if (tennisX < 0) {
-    // if it's too far left, make the velocity positive
     tennisXVelocity = -tennisXVelocity;
   }
 
   // Same check, but for vertical movement. Reverse it in either case.
-  if (tennisY > height - tennisHeight) {
-    tennisYVelocity = -tennisYVelocity;
-  } else if (tennisY < 0) {
+  if (tennisY > height - tennisHeight || tennisY < 0) {
     tennisYVelocity = -tennisYVelocity;
   }
 
@@ -93,13 +89,22 @@ function draw() {
     tennisY += tennisYVelocity;
   }
 
-  // Draw the logo at the new position.
+  // Draw the logo at the new position with the current tint color.
+  tint(tintColor, 255, 255);
   image(dvdImage, dvdX, dvdY, dvdWidth, dvdHeight);
+  noTint();
+  
   image(tennisImage, tennisX, tennisY, tennisWidth, tennisHeight);
 
   // Debugging
+  
   text("dvdX: " + dvdX, 0, height - 10);
   text("dvdY: " + dvdY, 55, height - 10);
   text("dvdXVelocity: " + dvdXVelocity, 110, height - 10);
   text("dvdYVelocity: " + dvdYVelocity, 200, height - 10);
+
+  text("tX: " + tennisX, 0, height - 20);
+  text("tY: " + tennisY, 55, height - 20);
+  text("tXVelocity: " + tennisXVelocity, 110, height - 20);
+  text("tYVelocity: " + tennisYVelocity, 200, height - 20);
 }
