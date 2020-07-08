@@ -4,7 +4,9 @@ let height = 500
 function setup() {
   // Canvas & color settings
   createCanvas(width, height);
+  background(backgroundColor);
   colorMode(HSB,360,100,100)
+  noStroke()
 
 }
 
@@ -14,8 +16,10 @@ let color = 1
 
 
 function setColor() {
-  if (mouseIsPressed) {
-    return (get(mouseX,mouseY))
+  if (mouseIsPressed && mouseY<paintBox_Y) {
+    colorMode(RGB)
+    fill(get(mouseX,mouseY))
+    colorMode(HSB)
   }
 }
 function makePaints() {
@@ -27,16 +31,18 @@ function makePaints() {
   }  
 }
 
-function draw() {
+function scribble() {
   if (mouseISPressed) {
-    
+    circle(mouseX,mouseY,5)
   }
 }
 
+
 function draw() {
-  background(backgroundColor);
   makePaints()
+  console.log(setColor())
   fill(setColor())
+  scribble()
   
   
   }
