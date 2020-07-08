@@ -37,13 +37,13 @@ function draw() {
 
   // The red and blue circles:
   fill(color1);
-  ellipse(100, 200, 50);
+  ellipse(width/4, height/2, 50);
   fill(color2);
-  ellipse(300, 200, 50);
+  ellipse(3/4*width, height/2, 50);
 
   // The grey circle and the text:
   fill(textColor);
-  ellipse(50, 50, 50);
+  ellipse(mouseX, mouseY, 50);
   text("Flip the switch", 20, 20);
 }
 
@@ -52,6 +52,6 @@ function drawCenterLine() {
   // back off.
   // A line segment in p5.js has four arguments: x1, y1, x2, y2
   stroke(textColor);
-  line(200, 0, 200, 400);
+  line(width/2, 0, width/2,height);
   noStroke();
 }
