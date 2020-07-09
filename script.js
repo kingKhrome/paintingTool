@@ -1,26 +1,18 @@
-let backgroundColor = 0
-let width = 500
-let height = 500
+
 function setup() {
-  // Canvas & color settings
-  createCanvas(width, height);
-  background(backgroundColor);
+  // Canvas & color setting
   noStroke()
-  frameRate(1000)
-
+  let width = displayWidth
+  let height = displayHeight
+  createCanvas(width, height);
+  background(255);
+  let paintBox_X = [0,1*width/10,2*width/10,3*width/10,4*width/10,5*width/10,6*width/10,7*width/10,8*width/10,9*width/10,width]
+  let paintBox_Y = height/25
+  let color1 = 1
+  let color2 = 255
+  let brushSize =10
+  frameRate(120)
 }
-function wait(s) {
-  let time = Date.now();
-  let t = null;
-  while (t - time < s) {
-    t = Date.now(); }
-}
-
-let paintBox_X = [0,1*width/10,2*width/10,3*width/10,4*width/10,5*width/10,6*width/10,7*width/10,8*width/10,9*width/10,width]
-let paintBox_Y = height/25
-let color1 = 1
-let color2 = 255
-let brushSize =10
 
 function setColor() {
   if (mouseIsPressed && mouseY<2*paintBox_Y) {
@@ -89,9 +81,7 @@ function draw() {
   setColor()
   scribble()
   earse()
-  changeSize()
-  
-  
+  changeSize()  
   }
              
   
