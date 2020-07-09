@@ -76,9 +76,9 @@ function changeSize(){
     console.log('yea')
   }
   if (mouseIsPressed && dist(mouseX,mouseY,24,455) < 20){
-    if (brushSize > 1) brushSize-=1;
+    brushSize+=1
     wait(100)
-    console.log('yea')
+    console.log('nah')
   }
   
 }
