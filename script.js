@@ -1,16 +1,24 @@
+ let width 
+  let height
 
+  let paintBox_X 
+  let paintBox_Y 
+  let color1 
+  let color2 
+  let brushSize 
+  
 function setup() {
   // Canvas & color setting
   noStroke()
-  let width = displayWidth
-  let height = displayHeight
+  width = displayWidth
+  height = displayHeight
   createCanvas(width, height);
   background(255);
-  let paintBox_X = [0,1*width/10,2*width/10,3*width/10,4*width/10,5*width/10,6*width/10,7*width/10,8*width/10,9*width/10,width]
-  let paintBox_Y = height/25
-  let color1 = 1
-  let color2 = 255
-  let brushSize =10
+   paintBox_X = [0,1*width/10,2*width/10,3*width/10,4*width/10,5*width/10,6*width/10,7*width/10,8*width/10,9*width/10,width]
+  paintBox_Y = height/25
+   color1 = 1
+  color2 = 255
+  brushSize =10
   frameRate(120)
 }
 
