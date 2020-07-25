@@ -1,57 +1,99 @@
-// Be sure to name any p5.js functions we use in the global so Glitch can recognize them.
-// Add to this list as you consult the p5.js documentation for other functions.
-/* global angleMode, DEGREES, arc, clear, createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
-          rect, ellipse, stroke, image, loadImage, collideCircleCircle, collideRectCircle, text, tint, noTint
-          mouseX, mouseY, strokeWeight, line, mouseIsPressed, noFill, windowWidth, windowHeight, noStroke, 
-          keyCode, PI, HALF_PI, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize */
-
-// We'll use variables for most of our colors in this code-along.
-let backgroundColor;
-let color1;
-let color2;
-let textColor;
-
+let backgroundColor = 0
+let width = 500
+let height = 500
 function setup() {
   // Canvas & color settings
-  createCanvas(400, 400);
-  colorMode(HSB, 360, 100, 100);
-  noStroke();
+  createCanvas(width, height);
+  background(backgroundColor);
+  noStroke()
+  frameRate(1000)
 
-  // When used with only one argument, the color mode is greyscale.
-  // 0 is black and 100 is white.
-  backgroundColor = color(95);
-  textColor = color(20);
-  // When used with three arguments, the function takes, in this order:
-  // HUE - 0 to 360 degrees on a color wheel - 0 is red, 120 is green and 240
-  //       is blue.
-  // SATURATION - 0 is no color (greyscale), and 100 is as bold as possible.
-  // BRIGHTNESS - 0 is no light (black), and 100 is as bright as possible.
-  color1 = color(0, 80, 80);
-  color2 = color(200, 80, 80);
 }
+function wait(s) {
+  let time = Date.now();
+  let t = null;
+  while (t - time < s) {
+    t = Date.now(); }
+}
+
+let paintBox_X = [0,1*width/10,2*width/10,3*width/10,4*width/10,5*width/10,6*width/10,7*width/10,8*width/10,9*width/10,width]
+let paintBox_Y = height/25
+let color1 = 1
+let color2 = 255
+let brushSize =10
+
+function setColor() {
+  if (mouseIsPressed && mouseY<2*paintBox_Y) {
+    colorMode(RGB)
+    let col = get(mouseX,mouseY)
+    color2 = color(col[0],col[1],col[2])
+  }
+}
+function makePaints() {
+  colorMode(HSB,360,100,100)
+  for(let i=0; i<paintBox_X.length-1; i++){ 
+    fill(color1*i*36,100,100)
+    rect( paintBox_X[i] ,0 ,paintBox_X[i+1] ,paintBox_Y)
+    fill(color1*i*36+18,50,65)
+    rect( paintBox_X[i] ,paintBox_Y ,paintBox_X[i+1] ,paintBox_Y)
+  }  
+}
+
+function earse() {
+  fill('white')
+  rect(0,height-height/20,width/10.5,height-height/20)
+  fill(0)
+  textStyle(BOLD)
+  text('Reset',5,height-height/55)
+  if(mouseIsPressed && dist(mouseX,mouseY,width/20,height-height/40) < 20 ) {
+    console.log('hi')
+    background(backgroundColor);
+  }
+}
+function scribble() {
+  if (mouseIsPressed) {
+    fill(color2)
+    circle(mouseX,mouseY,brushSize)
+  }
+}
+
+function changeSize(){
+  fill('white')
+  rect(0,445,width/10.5,25)
+  fill(0)
+  textStyle(BOLD)
+  text('Bigger',3,height-height/13)
+  
+  fill('white')
+  rect(0,415,47.6,25)
+  fill(0)
+  textStyle(BOLD)
+  text('Smaller',2,433)
+  
+  if (mouseIsPressed && dist(mouseX,mouseY,24,425) < 20){
+    if (brushSize > 1) brushSize-=1;
+    wait(100)
+    console.log('yea')
+  }
+  if (mouseIsPressed && dist(mouseX,mouseY,24,455) < 20){
+    brushSize+=1
+    wait(100)
+    console.log('nah')
+  }
+  
+}
+
 
 function draw() {
-  background(backgroundColor);
-  // Call the drawCenterLine function here to run the three lines of code
-  // contained in that function.
+  makePaints()
+  setColor()
+  scribble()
+  earse()
+  changeSize()
+  
+  
+  }
+             
+  
+  
 
-  // The red and blue circles:
-  fill(color1);
-  ellipse(100, 200, 50);
-  fill(color2);
-  ellipse(300, 200, 50);
-
-  // The grey circle and the text:
-  fill(textColor);
-  ellipse(50, 50, 50);
-  text("Flip the switch", 20, 20);
-}
-
-function drawCenterLine() {
-  // This function will turn stroke on, draw the line, and then turn stroke
-  // back off.
-  // A line segment in p5.js has four arguments: x1, y1, x2, y2
-  stroke(textColor);
-  line(200, 0, 200, 400);
-  noStroke();
-}
